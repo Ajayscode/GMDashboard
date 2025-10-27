@@ -1,0 +1,32 @@
+.sprints-dashboard {
+  padding: var(--mantine-spacing-md);
+}
+
+.sprints-header {
+  margin-bottom: var(--mantine-spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-container {
+  background-color: white;
+  border-radius: var(--mantine-radius-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: auto;
+}
+
+.status-badge {
+  width: 85px;
+}
+
+@media (max-width: 768px) {
+  .sprints-dashboard {
+    padding: var(--mantine-spacing-sm);
+  }
+
+  .table-container {
+    margin: 0 -var(--mantine-spacing-sm);
+    border-radius: 0;
+  }
+}
