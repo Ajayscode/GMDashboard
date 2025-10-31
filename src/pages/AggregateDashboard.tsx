@@ -7,22 +7,15 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
 } from "recharts";
 
 const data = [
-  { name: "Sprint 1", completed: 8, total: 10 },
-  { name: "Sprint 2", completed: 12, total: 15 },
-  { name: "Sprint 3", completed: 7, total: 8 },
-  { name: "Sprint 4", completed: 15, total: 18 },
-];
-
-const velocityData = [
-  { sprint: "Sprint 1", velocity: 8 },
-  { sprint: "Sprint 2", velocity: 12 },
-  { sprint: "Sprint 3", velocity: 7 },
-  { sprint: "Sprint 4", velocity: 15 },
+  { name: "Sprint 1", items: 8, bugs: 10, productionEscalations: 2 },
+  { name: "Sprint 2", items: 12, bugs: 5, productionEscalations: 3 },
+  { name: "Sprint 3", items: 21, bugs: 15, productionEscalations: 2 },
+  { name: "Sprint 4", items: 15, bugs: 10, productionEscalations: 5 },
 ];
 
 export function AggregateDashboard() {
@@ -40,8 +33,13 @@ export function AggregateDashboard() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="completed" fill="#82ca9d" name="Completed" />
-              <Bar dataKey="total" fill="#8884d8" name="Total" />
+              <Bar dataKey="items" fill="#82ca9d" name="items" />
+              <Bar dataKey="bugs" fill="#8884d8" name="bugs" />
+              <Bar
+                dataKey="productionEscalations"
+                fill="#ff7300"
+                name="Production Escalations"
+              />
             </BarChart>
           </Paper>
         </Grid.Col>
@@ -49,16 +47,62 @@ export function AggregateDashboard() {
         <Grid.Col span={6}>
           <Paper shadow="xs" p="md">
             <Title order={3} mb="md">
-              Velocity Trend
+              Sprint Trend
             </Title>
-            <LineChart width={500} height={300} data={velocityData}>
+            <AreaChart
+              width={500}
+              height={300}
+              responsive
+              data={data}
+              margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorItems" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorBugs" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient
+                  id="colorEscalations"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="5%" stopColor="#ff7300" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#ff7300" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="name" />
+              <YAxis width="auto" />
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="sprint" />
-              <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="velocity" stroke="#8884d8" />
-            </LineChart>
+              <Area
+                type="monotone"
+                dataKey="items"
+                stroke="#8884d8"
+                fillOpacity={1}
+                fill="url(#colorItems)"
+              />
+              <Area
+                type="monotone"
+                dataKey="bugs"
+                stroke="#82ca9d"
+                fillOpacity={1}
+                fill="url(#colorBugs)"
+              />
+              <Area
+                type="monotone"
+                dataKey="productionEscalations"
+                stroke="#ff7300"
+                fillOpacity={1}
+                fill="url(#colorEscalations)"
+              />
+            </AreaChart>
           </Paper>
         </Grid.Col>
       </Grid>

@@ -137,7 +137,7 @@ export function SprintsDashboard() {
               <Table.Th>Sprint Name</Table.Th>
               <Table.Th>Items</Table.Th>
               <Table.Th>Start Date</Table.Th>
-              <Table.Th style={{ width: 50 }}></Table.Th>
+              <Table.Th style={{ width: 50 }}>Actions</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>

@@ -21,7 +21,7 @@ export default function AppShell() {
     <>
       <MantineAppShell
         navbar={{
-          width: 250,
+          width: "250px",
           breakpoint: "sm",
           collapsed: { mobile: !mobileOpened },
         }}
@@ -70,7 +70,7 @@ export default function AppShell() {
             <Text>Aggregate Dashboard</Text>
           </Link>
         </MantineAppShell.Navbar>
-        <MantineAppShell.Main>
+        <MantineAppShell.Main style={{ width: "100vw" }}>
           <Routes>
             <Route path="/sprints" element={<SprintsDashboard />} />
             <Route path="/aggregate" element={<AggregateDashboard />} />
